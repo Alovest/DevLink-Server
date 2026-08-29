@@ -28,7 +28,7 @@ fun Route.registerRoute(
             val (newUser, isConflict) = newSuspendedTransaction {
                 val existingUser = userService.findByUsername(registerRequest.username)
                 if (existingUser != null) {
-                    return@newSuspendedTransaction null to true // Сигнализируем о конфликте
+                    return@newSuspendedTransaction null to true
                 }
 
                 val user = userService.createUser(
