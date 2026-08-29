@@ -1,0 +1,12 @@
+ktor:
+  deployment:
+    port: 8080
+  application:
+    modules:
+      - com.example.app.MainKt.main
+
+jwt:
+  audience: "$JWT_AUDIENCE"
+  issuer: "$JWT_ISSUER"
+  realm: "$JWT_REALM"
+  secret: "$JWT_SECRET"
