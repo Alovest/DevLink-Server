@@ -1,11 +1,13 @@
 package com.example.application_layer.service_user
 
 import com.example.data.database.user.dao.UserEntity
+import com.example.data.database.user.table.UserTable
 import com.example.data.mappers.user.toDto
 import com.example.data.models.user.User
 import com.example.domain.UserActionRepository
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import org.mindrot.jbcrypt.BCrypt
 import java.util.UUID
 
 class UserService(
@@ -36,8 +38,18 @@ class UserService(
         UserEntity.new {
             this.username = username
             this.email = email
-            this.password = password
+            this.password = BCrypt.hashpw(password, BCrypt.gensalt())
         }.toDto()
+    }
+
+    suspend fun loginUser(username: String, password: String): User? = dbQuery{
+        val userEntity = UserEntity.find { UserTable.username eq username }.singleOrNull()
+
+        if (userEntity != null && BCrypt.checkpw(password, userEntity.password)) {
+        userEntity.toDto()
+        } else {
+            null
+        }
     }
 }
 

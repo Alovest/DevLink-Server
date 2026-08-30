@@ -2,6 +2,8 @@ package com.example.data.repository
 
 import com.example.data.models.user.User
 import com.example.domain.UserActionRepository
+import kotlinx.coroutines.Dispatchers
+import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import java.util.UUID
 
 class UserActionRepositoryImpl(): UserActionRepository {
@@ -24,7 +26,7 @@ class UserActionRepositoryImpl(): UserActionRepository {
         return users.find { it.username == username }
     }
 
-    override fun findById(id: UUID): User? {
+    override fun findById(id: UUID): User?  {
         return users.find { it.id == id }
     }
 }

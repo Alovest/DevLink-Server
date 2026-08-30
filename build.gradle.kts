@@ -31,6 +31,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:${exposed_version}")
     implementation("org.postgresql:postgresql:42.7.5")
     implementation("org.xerial:sqlite-jdbc:3.45.1.0")
+    implementation("org.mindrot:jbcrypt:0.4")
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)
 }

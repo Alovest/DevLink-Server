@@ -1,9 +1,7 @@
-package com.example.app
+package com.example.app.user_route
 
 import com.example.application_layer.service_auth.JwtService
 import com.example.application_layer.service_user.UserService
-import com.example.data.database.user.dao.UserEntity
-import com.example.data.database.user.table.UserTable.email
 import com.example.data.models.user.request.UserRequest
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive

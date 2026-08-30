@@ -8,5 +8,5 @@ data class UserResponse(
     @Serializable(with = UUIDSerializer::class)
     val id: UUID,
     val email: String,
-    val password: String,
+    val username: String,
 )

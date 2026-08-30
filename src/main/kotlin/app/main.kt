@@ -22,7 +22,7 @@ fun Application.main() {
         val userRepository: UserActionRepository = UserActionRepositoryImpl()
         val userService = UserService(userRepository)
         val jwtService = JwtService(this.environment.config, userService)
-
-        configureRouting()
         configureSecurity(jwtService)
+        configureRouting()
+
 }

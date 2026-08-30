@@ -16,10 +16,10 @@ class JwtService(
     private val config: ApplicationConfig,
     private val userService: UserService
 ) {
-    private val audience = getConfigProperty("jwt.audience")
-    private val issuer = getConfigProperty("jwt.issuer")
-    private val secret = getConfigProperty("jwt.secret")
-    val realm = getConfigProperty("jwt.realm")
+    private val audience = config.propertyOrNull("jwt.audience")?.getString() ?: "default-audience"
+    private val issuer = config.propertyOrNull("jwt.issuer")?.getString() ?: "default-issuer"
+    private val secret = config.propertyOrNull("jwt.secret")?.getString() ?: "super-secret-key-at-least-32-characters-long"
+    val realm = config.propertyOrNull("jwt.realm")?.getString() ?: "default-realm"
 
     val jwtVerifier: JWTVerifier =
         JWT.require(Algorithm.HMAC256(secret))
@@ -27,15 +27,12 @@ class JwtService(
             .withIssuer(issuer)
             .build()
 
-    fun createJwtTokenLogin(userRequest: UserRequest): String? {
-        val foundUser = userService.findByUsername(userRequest.username)
-        return if (foundUser != null && foundUser.password == userRequest.password) {
-            createJwtTokenRegister(foundUser)
-        } else null
+    fun createJwtTokenLogin(user: User): String {
+        return createJwtTokenRegister(user)
     }
 
-    fun createJwtTokenRegister(user: User): String? {
-       return JWT.create()
+    fun createJwtTokenRegister(user: User): String {
+        return JWT.create()
             .withIssuer(issuer)
             .withAudience(audience)
             .withClaim("username", user.username)
@@ -43,9 +40,11 @@ class JwtService(
             .sign(Algorithm.HMAC256(secret))
     }
 
-    fun customValidator(credential: JWTCredential): JWTPrincipal? {
+    suspend fun customValidator(credential: JWTCredential): JWTPrincipal? {
         val username = extractUsername(credential)
-        val foundUser = username?.let { userService::findByUsername }
+        // Оборачиваем вызов в безопасную проверку
+        val foundUser = username?.let { userService.findByUsername(it) }
+
         return if (foundUser != null && audienceMatches(credential)) {
             JWTPrincipal(credential.payload)
         } else null
@@ -56,7 +55,4 @@ class JwtService(
 
     fun extractUsername(credential: JWTCredential): String? =
         credential.payload.getClaim("username").asString()
-
-    fun getConfigProperty(path: String): String
-    = config.property(path).getString()
 }
