@@ -43,7 +43,7 @@ class UserService(
     }
 
     suspend fun loginUser(username: String, password: String): User? = dbQuery{
-        val userEntity = UserEntity.find { UserTable.username eq username }.singleOrNull()
+        val userEntity = UserEntity.find { UserTable.username eq username }.firstOrNull()
 
         if (userEntity != null && BCrypt.checkpw(password, userEntity.password)) {
         userEntity.toDto()

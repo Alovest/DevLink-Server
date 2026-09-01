@@ -8,6 +8,8 @@ import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.post
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 fun Route.loginRoute(
     userService: UserService,
@@ -19,7 +21,9 @@ fun Route.loginRoute(
         if (user != null){
             val token = jwtService.createJwtTokenLogin(user)
 
-            call.respond(HttpStatusCode.OK, mapOf("token" to token))
+            call.respond(HttpStatusCode.OK, buildJsonObject{
+                put("token", token)
+            })
         } else {
             call.respond(HttpStatusCode.Unauthorized, "Неверное имя пользователя или пароль")
         }

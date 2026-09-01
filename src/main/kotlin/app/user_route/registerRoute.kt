@@ -2,6 +2,7 @@ package com.example.app.user_route
 
 import com.example.application_layer.service_auth.JwtService
 import com.example.application_layer.service_user.UserService
+import com.example.data.models.user.AuthReponse
 import com.example.data.models.user.request.UserRequest
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
@@ -49,9 +50,9 @@ fun Route.registerRoute(
 
             val token = jwtService.createJwtTokenRegister(newUser)
 
-            call.respond(HttpStatusCode.Created, mapOf(
-                "token" to token,
-                "user" to newUser
+            call.respond(HttpStatusCode.Created, AuthReponse(
+                token = token,
+                user = newUser
             ))
         } catch (e: Exception) {
             call.respond(HttpStatusCode.InternalServerError, "Регистрация упала: ${e.localizedMessage}")
