@@ -11,5 +11,4 @@ class UserEntity(id: EntityID<UUID>) : UUIDEntity(id) {
     var email by UserTable.email
     var username by UserTable.username
     var password by UserTable.password
-    var interests by UserTable.
 }

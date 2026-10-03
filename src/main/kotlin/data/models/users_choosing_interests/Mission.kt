@@ -2,11 +2,11 @@ package com.example.data.models.users_choosing_interests
 
 import com.example.util.UUIDSerializer
 import kotlinx.serialization.Serializable
-import kotlin.uuid.Uuid
+import java.util.UUID
 
 @Serializable
-data class Interests(
+data class Mission(
     @Serializable(with = UUIDSerializer::class)
-    val id: Uuid,
+    val id: UUID,
     val name: String,
 )
