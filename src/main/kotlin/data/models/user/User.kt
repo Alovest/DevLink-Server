@@ -7,8 +7,9 @@ import java.util.UUID
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
+@OptIn(ExperimentalUuidApi::class)
 @Serializable
-data class User @OptIn(ExperimentalUuidApi::class) constructor(
+data class User (
     @Serializable(with = UUIDSerializer::class)
     val id: Uuid,
     val email: String,

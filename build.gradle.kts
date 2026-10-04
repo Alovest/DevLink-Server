@@ -16,7 +16,7 @@ kotlin {
     jvmToolchain(21)
 }
 dependencies {
-    val exposed_version = "0.53.0"
+    val exposed_version = "1.0.0"
     implementation(ktorLibs.serialization.kotlinx.json)
     implementation(ktorLibs.server.auth)
     implementation(ktorLibs.server.auth.jwt)

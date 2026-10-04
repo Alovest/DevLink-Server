@@ -8,4 +8,5 @@ fun UserEntity.toDto(): User = User(
     email = this.email,
     username = this.username,
     password = this.password,
+    usersChoices = this
 )
