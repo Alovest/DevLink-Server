@@ -5,9 +5,21 @@ import kotlinx.serialization.Serializable
 import java.util.UUID
 import kotlin.uuid.Uuid
 
-@Serializable
-data class Interests(
-    @Serializable(with = UUIDSerializer::class)
-    val id: UUID,
-    val name: String,
-)
+enum class Interests {
+    Startups,
+    Open_Source,
+    Mobile_Apps,
+    Web_Development,
+    Robotics,
+    Game_Development,
+    Cybersecurity,
+    AI_AND_Machine_Learning,
+    Blockchain,
+    Cloud_Computing,
+    Developer_Tools,
+    SaaS,
+    FinTech,
+    Education,
+    Productivity,
+    Hardware,
+}

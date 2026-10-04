@@ -4,9 +4,11 @@ import com.example.util.UUIDSerializer
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
-@Serializable
-data class Mission(
-    @Serializable(with = UUIDSerializer::class)
-    val id: UUID,
-    val name: String,
-)
+enum class Mission {
+    Grow_My_Network,
+    Find_a_co_Founder,
+    Find_a_job,
+    Learn_and_improve_my_skills,
+    Build_my_own_project,
+    Join_a_project
+}

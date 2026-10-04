@@ -1,5 +1,6 @@
 package com.example.data.database.user.table
 
+import com.example.data.models.users_choosing_interests.UsersChoices
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.dao.id.UUIDTable
 
