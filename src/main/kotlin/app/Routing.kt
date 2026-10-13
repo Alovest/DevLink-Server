@@ -1,5 +1,6 @@
 package com.example.app
 
+import com.apple.eawt.Application
 import com.example.app.user_route.getUserByIdRoute
 import com.example.app.user_route.loginRoute
 import com.example.app.user_route.registerRoute
@@ -8,7 +9,8 @@ import com.example.application_layer.service_user.UserService
 import com.example.data.repository.UserActionRepositoryImpl
 import com.example.domain.UserActionRepository
 import io.ktor.server.application.*
-import io.ktor.server.routing.*
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
 
 fun Application.configureRouting() {
     val repository: UserActionRepository = UserActionRepositoryImpl()

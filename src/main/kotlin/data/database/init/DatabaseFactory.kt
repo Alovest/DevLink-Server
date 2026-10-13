@@ -1,6 +1,10 @@
 package com.example.data.database.init
 
 import com.example.data.database.user.table.UserTable
+import com.example.data.database.users_choosing_interests.experience.table.ExperienceTable
+import com.example.data.database.users_choosing_interests.interests.table.InterestsTable
+import com.example.data.database.users_choosing_interests.mission.table.MissionTable
+import com.example.data.database.users_choosing_interests.teck_stack.table.TechStackTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -15,11 +19,15 @@ object DatabaseFactory {
         Database.connect(
             url = jbcUrl,
             driver = driverClassName,
-
         )
-
         transaction {
-            SchemaUtils.create(UserTable)
+            SchemaUtils.create(
+                UserTable,
+                MissionTable,
+                InterestsTable,
+                ExperienceTable,
+                TechStackTable,
+                )
         }
     }
 }

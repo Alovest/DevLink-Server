@@ -1,5 +1,6 @@
 package com.example.app
 
+import com.apple.eawt.Application
 import com.example.application_layer.service_auth.JwtService
 import com.example.application_layer.service_user.UserService
 import com.example.data.database.init.DatabaseFactory
