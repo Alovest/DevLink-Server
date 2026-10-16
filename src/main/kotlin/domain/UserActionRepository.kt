@@ -15,4 +15,6 @@ interface UserActionRepository {
     fun findByUsername(username: String): User?
 
     fun findById(id: UUID): User?
+
+
 }
